@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Data;
-using API.Entities;
+using Controllers;
+using Data;
+using entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+     public class UsersController : BaseApiController 
     {
         private readonly DataContext _context;
         public UsersController(DataContext context)
@@ -29,5 +28,5 @@ namespace API.Controllers
         {
             return await _context.Users.FindAsync(id);
         }
-    }   
-} 
+    }
+}
