@@ -7,7 +7,7 @@ using entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace Controllers
 {
      public class UsersController : BaseApiController 
     {
