@@ -3,32 +3,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using Data;
 using entities;
+using Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using Controllers;
+using DTOs;
 
 namespace Controllers
 {
-     public class UsersController : BaseApiController 
+    [Authorize]
+    public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
-        public UsersController(DataContext context)
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _userRepository = userRepository;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+       [HttpGet]
+        public async Task<ActionResult<IEnumerable<MemberDato>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+           
+           var users = await _userRepository.GetUsersAsync();
+
+           var usersToReturn = _mapper.Map<IEnumerable<MemberDato>>(users);
+
+            return Ok(usersToReturn);
+
+            
         }
 
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDato>> GetUser(string username)
         {
-            return await _context.Users.FindAsync(id);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+
+            return _mapper.Map<MemberDato>(user);
         }
     }
 }
