@@ -18,7 +18,7 @@ namespace entities
 
       public string KnownAs { get; set; }
 
-      public DateTime Created { get; set; } =DateTime.Now;
+      public DateTime Created { get; set; } = DateTime.Now;
 
       public DateTime LastActive { get; set; } = DateTime.Now;
 
@@ -36,8 +36,8 @@ namespace entities
 
       public ICollection<Photo> Photos { get; set; }
 
-      public int GetAge(){
-        return DateOfBirth.CalculateAge();
-      }
+        //   public int GetAge(){
+        //return DateOfBirth.CalculateAge();
+      //}
     }
 }

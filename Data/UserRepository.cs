@@ -6,6 +6,7 @@ using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Linq;
+using AutoMapper.QueryableExtensions;
 
 namespace Data
 {
@@ -19,18 +20,18 @@ namespace Data
             _context = context;
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDato> GetMemberAsync(string username)
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<MemberDato>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+        public async Task<IEnumerable<MemberDato>> GetMembersAsync()
         {
             return await _context.Users 
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<MemberDato>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 
@@ -61,6 +62,16 @@ namespace Data
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        Task<MemberDato> IUserRepository.GetMemberAsync(string username)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Task<IEnumerable<MemberDato>> IUserRepository.GetMembersAsync()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Controllers
 
            var usersToReturn = _mapper.Map<IEnumerable<MemberDato>>(users);
 
-            return Ok(usersToReturn);
+            return Ok(users);
 
             
         }
@@ -41,9 +41,9 @@ namespace Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDato>> GetUser(string username)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(username);
+           return await _userRepository.GetMemberAsync(username);
 
-            return _mapper.Map<MemberDato>(user);
+            
         }
     }
 }
