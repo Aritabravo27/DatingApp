@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DTOs;
 using entities;
 using Interfaces;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using System.Linq;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
-   public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
@@ -62,16 +62,6 @@ namespace Data
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
-        }
-
-        Task<MemberDato> IUserRepository.GetMemberAsync(string username)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        Task<IEnumerable<MemberDato>> IUserRepository.GetMembersAsync()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

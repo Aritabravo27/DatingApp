@@ -12,8 +12,11 @@ namespace Middleware
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+
         private readonly ILogger<ExceptionMiddleware> _logger;
+
         private readonly IHostEnvironment _env;
+
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, 
             IHostEnvironment env)
         {
@@ -30,7 +33,7 @@ namespace Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
+                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 
@@ -46,4 +49,4 @@ namespace Middleware
             }
         }
     }
-} 
+}     
