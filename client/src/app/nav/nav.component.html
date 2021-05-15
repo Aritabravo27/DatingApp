@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
-        <a class="navbar-brand" routerLink='/'>Dating App</a>
+        <a class="navbar-brand" routerLink='/'>cloudy</a>
         <ul class="navbar-nav mr-auto" *ngIf="AccountService.currentUser$ | async" >
           <ng-container *ngIf="AccountService.currentUser$ | async">
           <li class="nav-item">
@@ -18,10 +18,10 @@
       </li>
         </ul>
 
-        <div class="dropdown" *ngIf="(AccountService.currentUser$ | async) as user" dropdown>
+        <div class="dropdown" *ngIf="(AccountService.currentUser$ | async) as user" dropdown >
            <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
             <div class="dropdown-menu " *dropdownMenu>
-              <a  class="drop-item">Edit profile</a>
+              <a  class="drop-item" >Edit profile</a>
               <div class="dropdown-divider"></div>
               <a  class="drop-item" (click)="logout()" >Logout</a>
             </div>

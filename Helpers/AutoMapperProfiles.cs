@@ -1,10 +1,10 @@
 using System.Linq;
+using DTOs;
 using entities;
 using Extensions;
 using AutoMapper;
-using DTOs;
 
-namespace Helpers
+namespace API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
@@ -17,4 +17,4 @@ namespace Helpers
             CreateMap<Photo, PhotoDto>();
         }
     }
-} 
+}

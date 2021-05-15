@@ -5,7 +5,7 @@ using Services;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using Helpers;
+using API.Helpers;
 
 namespace Extensions
 {
