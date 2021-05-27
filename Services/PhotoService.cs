@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
-using API.Interfaces;
+using Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Helpers;
-using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 

@@ -9,3 +9,4 @@ namespace Helpers
         public string ApiSecret { get; set; }
     }
 }
+

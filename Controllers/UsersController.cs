@@ -13,7 +13,7 @@ using DTOs;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Extensions;
-using API.Interfaces;
+using Helpers;
 
 namespace Controllers
 {
@@ -30,14 +30,21 @@ namespace Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDato>>> GetUsers()
+       [HttpGet]
+        public async Task<ActionResult<IEnumerable<MemberDato>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUsername = user.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, 
+                users.TotalCount, users.TotalPages);
 
             return Ok(users);
-
-
         }
 
 

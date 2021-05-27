@@ -4,7 +4,7 @@ using entities;
 using Extensions;
 using AutoMapper;
 
-namespace API.Helpers
+namespace Helpers
 {
     public class AutoMapperProfiles : Profile
     {

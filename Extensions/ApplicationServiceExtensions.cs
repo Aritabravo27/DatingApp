@@ -5,9 +5,8 @@ using Services;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using API.Helpers;
 using Helpers;
-using API.Interfaces;
+
 
 namespace Extensions
 {
@@ -18,6 +17,7 @@ namespace Extensions
              services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
              services.AddScoped<ITokenService, TokenService>();
              services.AddScoped<IPhotoService, PhotoService>();
+             services.AddScoped<LogUserActivity>();
              services.AddScoped<IUserRepository, UserRepository>();
              services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
              services.AddDbContext<DataContext>(options =>
